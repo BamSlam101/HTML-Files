@@ -16,10 +16,11 @@
     <button onclick="
       playGame('scissors');
     ">Scissors</button>
+
     <!--***-->
-    <p class="js-result"></p>
-    <p class="js-moves"></p>
-    <p class="js-score"></p>
+    <p class="js-result">?</p>
+    <p class="js-moves">?</p>
+    <p class="js-score">?</p>
 
     <button onclick="
       score.wins = 0;
@@ -30,13 +31,19 @@
     ">Reset Score</button>
 
     <script>
+      let playerMove
+
+      let result = '';
+
+      let computerMove = '';
+
+      let randomNumber
+
       let score = JSON.parse(localStorage.getItem('score')) || {
         wins: 0,
         losses: 0,
         ties: 0
       };
-
-      updateScoreElement();
 
       /*
       if (!score) {
@@ -91,22 +98,13 @@
       localStorage.setItem('score', JSON.stringify(score));
 
       updateScoreElement();
-    // ***
-        alert(`You picked ${playerMove}. Computer picked ${computerMove}. ${result}
-Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+
+      document.querySelector('.js-result').innerHTML = result;
+
+      document.querySelector('.js-moves').innerHTML = `You ${playerMove} - ${computerMove} Computer`;
+
       }
       // ***
-      function updateScoreElement() {
-          document.querySelector('.js-score')
-        .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-
-          document.querySelector('.js-result')
-        .innerHTML = `${result}`
-
-          document.querySelector('.js-moves')
-        .innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}. ${result}`
-      }
-      
       function pickComputerMove() {
         randomNumber = Math.random();
 
@@ -118,12 +116,15 @@ Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
         computerMove = 'scissors';
       }
     };
-      
-      let result = '';
 
-      let computerMove = '';
+        function updateScoreElement() {
 
-      let randomNumber
+        
+
+      document.querySelector('.js-score')
+      .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+    }
+
     </script>
   </body>
 </html>
